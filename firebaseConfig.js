@@ -14,6 +14,5 @@ if (!firebase.apps.length) {
 } else {
   firebase.app(); 
 }
-
 export default firebase;
 
