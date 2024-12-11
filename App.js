@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text, TextInput, TouchableOpacity, FlatList } from 'react-native';
+import { StyleSheet, View, Text, TextInput, TouchableOpacity, FlatList, ImageBackground } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
@@ -7,14 +7,21 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { firebase } from '@react-native-firebase/app';
 
-
+// HomeScreen with advanced design
 function HomeScreen() {
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Home Screen</Text>
-    </View>
+    <ImageBackground
+      source={{ uri: 'https://source.unsplash.com/random' }} // Replace with a real image URL
+      style={styles.backgroundImage}
+    >
+      <View style={styles.overlay}>
+        <Text style={styles.title}>Welcome to SchedulePro!</Text>
+        <Text style={styles.subtitle}>Manage your tasks, timetable, and profile in one place</Text>
+        </View>
+    </ImageBackground>
   );
 }
+
 function RegisterScreen({ setLoggedIn, setUserData }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -48,6 +55,7 @@ function RegisterScreen({ setLoggedIn, setUserData }) {
     </View>
   );
 }
+
 function LoginScreen({ setLoggedIn, setUserData }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -81,6 +89,7 @@ function LoginScreen({ setLoggedIn, setUserData }) {
     </View>
   );
 }
+
 function ProfileScreen({ loggedIn, setLoggedIn, setUserData }) {
   if (loggedIn) {
     return (
@@ -104,6 +113,7 @@ function ProfileScreen({ loggedIn, setLoggedIn, setUserData }) {
     );
   }
 }
+
 const TopTab = createMaterialTopTabNavigator();
 function ProfileNavigator({ setLoggedIn, setUserData }) {
   return (
@@ -114,9 +124,10 @@ function ProfileNavigator({ setLoggedIn, setUserData }) {
       <TopTab.Screen name="Login">
         {() => <LoginScreen setLoggedIn={setLoggedIn} setUserData={setUserData} />}
       </TopTab.Screen>
-    </TopTab.Navigator>
+    </TopTab.Navigator>  // Correct closing tag here
   );
 }
+
 function TimetableScreen() {
   const [selectedDate, setSelectedDate] = useState('');
   const [selectedTime, setSelectedTime] = useState('');
@@ -311,13 +322,28 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     padding: 20,
   },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
+  backgroundImage: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '100%',
   },
-  subTitle: {
+  overlay: {
+    backgroundColor: 'rgba(0, 0, 0, 0.4)',
+    padding: 30,
+    borderRadius: 10,
+  },
+  title: {
+    fontSize: 32,
+    fontWeight: 'bold',
+    color: '#fff',
+    textAlign: 'center',
+  },
+  subtitle: {
     fontSize: 18,
-    marginTop: 20,
+    color: '#fff',
+    textAlign: 'center',
+    marginBottom: 20,
   },
   input: {
     height: 40,
@@ -354,3 +380,4 @@ const styles = StyleSheet.create({
 });
 
 export default App;
+
