@@ -46,3 +46,36 @@ function RegisterScreen({ setLoggedIn, setUserData }) {
     </View>
   );
 }
+function LoginScreen({ setLoggedIn, setUserData }) {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleLogin = () => {
+    const userData = { username };
+    setUserData(userData);
+    setLoggedIn(true); 
+    alert(`Logged in: ${username}`);
+  };
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.title}>Login</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="Username"
+        value={username}
+        onChangeText={setUsername}
+      />
+      <TextInput
+        style={styles.input}
+        placeholder="Password"
+        value={password}
+        onChangeText={setPassword}
+        secureTextEntry
+      />
+      <TouchableOpacity style={styles.button} onPress={handleLogin}>
+        <Text style={styles.buttonText}>Login</Text>
+      </TouchableOpacity>
+    </View>
+  );
+}
