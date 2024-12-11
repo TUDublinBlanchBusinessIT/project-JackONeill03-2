@@ -300,3 +300,55 @@ function App() {
     </NavigationContainer>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#fff',
+    padding: 20,
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+  },
+  subTitle: {
+    fontSize: 18,
+    marginTop: 20,
+  },
+  input: {
+    height: 40,
+    borderColor: '#ccc',
+    borderWidth: 1,
+    marginTop: 20,
+    width: '100%',
+    padding: 10,
+    borderRadius: 5,
+  },
+  button: {
+    backgroundColor: '#6200ea',
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 5,
+    marginTop: 20,
+  },
+  buttonText: {
+    color: '#fff',
+    fontSize: 16,
+  },
+  event: {
+    fontSize: 16,
+    marginBottom: 10,
+  },
+  noEventsText: {
+    fontSize: 16,
+    color: 'gray',
+  },
+  text: {
+    fontSize: 18,
+    color: '#333',
+  },
+});
+
+export default App;
