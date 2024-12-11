@@ -259,3 +259,44 @@ function TasksScreen() {
     </View>
   );
 }
+
+const BottomTab = createBottomTabNavigator();
+
+function App() {
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [userData, setUserData] = useState(null);
+
+  return (
+    <NavigationContainer>
+      <BottomTab.Navigator
+        screenOptions={({ route }) => ({
+          tabBarIcon: ({ color, size }) => {
+            let iconName;
+            if (route.name === 'Home') {
+              iconName = 'home-outline';
+            } else if (route.name === 'Timetable') {
+              iconName = 'calendar-outline';
+            } else if (route.name === 'Tasks') {
+              iconName = 'clipboard-outline';
+            } else if (route.name === 'Profile') {
+              iconName = 'person-circle-outline';
+            }
+            return <Icon name={iconName} size={size} color={color} />;
+          },
+          tabBarActiveTintColor: '#6200ea',
+          tabBarInactiveTintColor: 'gray',
+        })}
+      >
+        <BottomTab.Screen name="Home" component={HomeScreen} />
+        <BottomTab.Screen name="Timetable" component={TimetableScreen} />
+        <BottomTab.Screen name="Tasks" component={TasksScreen} />
+        <BottomTab.Screen
+          name="Profile"
+          children={() => (
+            <ProfileScreen loggedIn={loggedIn} setLoggedIn={setLoggedIn} setUserData={setUserData} />
+          )}
+        />
+      </BottomTab.Navigator>
+    </NavigationContainer>
+  );
+}
