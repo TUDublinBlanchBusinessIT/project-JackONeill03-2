@@ -226,3 +226,36 @@ function TimetableScreen() {
     </View>
   );
 }
+
+function TasksScreen() {
+  const [tasks, setTasks] = useState([]);
+  const [task, setTask] = useState('');
+
+  const handleAddTask = () => {
+    if (task.trim()) {
+      setTasks((prevTasks) => [...prevTasks, task]);
+      setTask('');
+    }
+  };
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.title}>Tasks</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="Enter Task"
+        value={task}
+        onChangeText={setTask}
+      />
+      <TouchableOpacity style={styles.button} onPress={handleAddTask}>
+        <Text style={styles.buttonText}>Add Task</Text>
+      </TouchableOpacity>
+
+      <FlatList
+        data={tasks}
+        keyExtractor={(item, index) => index.toString()}
+        renderItem={({ item }) => <Text style={styles.event}>{item}</Text>}
+      />
+    </View>
+  );
+}
