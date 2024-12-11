@@ -102,3 +102,16 @@ function ProfileScreen({ loggedIn, setLoggedIn, setUserData }) {
     );
   }
 }
+const TopTab = createMaterialTopTabNavigator();
+function ProfileNavigator({ setLoggedIn, setUserData }) {
+  return (
+    <TopTab.Navigator>
+      <TopTab.Screen name="Register">
+        {() => <RegisterScreen setLoggedIn={setLoggedIn} setUserData={setUserData} />}
+      </TopTab.Screen>
+      <TopTab.Screen name="Login">
+        {() => <LoginScreen setLoggedIn={setLoggedIn} setUserData={setUserData} />}
+      </TopTab.Screen>
+    </TopTab.Navigator>
+  );
+}
