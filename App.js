@@ -79,3 +79,26 @@ function LoginScreen({ setLoggedIn, setUserData }) {
     </View>
   );
 }
+function ProfileScreen({ loggedIn, setLoggedIn, setUserData }) {
+  if (loggedIn) {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.title}>Profile</Text>
+        <Text style={styles.text}>You are logged in!</Text>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => {
+            setLoggedIn(false);
+            setUserData(null);
+          }}
+        >
+          <Text style={styles.buttonText}>Logout</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  } else {
+    return (
+      <ProfileNavigator setLoggedIn={setLoggedIn} setUserData={setUserData} />
+    );
+  }
+}
