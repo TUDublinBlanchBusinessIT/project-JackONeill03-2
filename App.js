@@ -158,3 +158,71 @@ function TimetableScreen() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Timetable</Text>
+      
+      {/* Date Picker */}
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => setShowDatePicker(true)}
+      >
+        <Text style={styles.buttonText}>
+          {selectedDate ? `Date: ${selectedDate}` : 'Select Date'}
+        </Text>
+      </TouchableOpacity>
+
+      {/* Show Date Picker Modal */}
+      {showDatePicker && (
+        <DateTimePicker
+          mode="date"
+          value={new Date()}
+          onChange={onDateChange}
+        />
+      )}
+
+      {/* Time Picker */}
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => setShowTimePicker(true)}
+      >
+        <Text style={styles.buttonText}>
+          {selectedTime ? `Time: ${selectedTime}` : 'Select Time'}
+        </Text>
+      </TouchableOpacity>
+
+      {/* Show Time Picker Modal */}
+      {showTimePicker && (
+        <DateTimePicker
+          mode="time"
+          value={new Date()}
+          onChange={onTimeChange}
+        />
+      )}
+
+      {/* Event Input */}
+      <TextInput
+        style={styles.input}
+        placeholder="Enter Event"
+        value={newEvent}
+        onChangeText={setNewEvent}
+      />
+      <TouchableOpacity style={styles.button} onPress={handleAddEvent}>
+        <Text style={styles.buttonText}>Add Event</Text>
+      </TouchableOpacity>
+
+      {/* Display Events for Selected Date */}
+      <Text style={styles.subTitle}>Events on {selectedDate || 'Select a Date'}:</Text>
+      {events[selectedDate] ? (
+        <FlatList
+          data={events[selectedDate]}
+          keyExtractor={(item, index) => index.toString()}
+          renderItem={({ item }) => (
+            <View>
+              <Text style={styles.event}>{item.event} - {item.time}</Text>
+            </View>
+          )}
+        />
+      ) : (
+        <Text style={styles.noEventsText}>No events for this date.</Text>
+      )}
+    </View>
+  );
+}
