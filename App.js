@@ -115,3 +115,46 @@ function ProfileNavigator({ setLoggedIn, setUserData }) {
     </TopTab.Navigator>
   );
 }
+function TimetableScreen() {
+  const [selectedDate, setSelectedDate] = useState('');
+  const [selectedTime, setSelectedTime] = useState('');
+  const [newEvent, setNewEvent] = useState('');
+  const [events, setEvents] = useState({});
+  const [showDatePicker, setShowDatePicker] = useState(false);
+  const [showTimePicker, setShowTimePicker] = useState(false);
+
+  const handleAddEvent = () => {
+    if (!selectedDate || !newEvent.trim()) {
+      alert('Please select a date, time, and enter an event.');
+      return;
+    }
+    const eventTime = selectedTime ? selectedTime : "No time specified";
+    setEvents((prevEvents) => ({
+      ...prevEvents,
+      [selectedDate]: [
+        ...(prevEvents[selectedDate] || []),
+        { event: newEvent, time: eventTime },
+      ],
+    }));
+    setNewEvent('');
+    setSelectedDate('');
+    setSelectedTime('');
+  };
+
+  const onDateChange = (event, selectedDate) => {
+    setShowDatePicker(false);
+    if (selectedDate) {
+      setSelectedDate(selectedDate.toLocaleDateString());
+    }
+  };
+
+  const onTimeChange = (event, selectedTime) => {
+    setShowTimePicker(false);
+    if (selectedTime) {
+      setSelectedTime(selectedTime.toLocaleTimeString());
+    }
+  };
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.title}>Timetable</Text>
